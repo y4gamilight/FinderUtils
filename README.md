@@ -1,6 +1,8 @@
 # FinderUtils
-Reveal Mac OS Application running directory from via a HTTP Request.
+Reveal Mac OS Application running directory from a HTTP Request.
 ![Alt Text](Demo.gif)
+Java
+![Alt Text](Demo_Java.gif)
 ### Why?
 Whenever start debugging iOS application on Simulator OSX copy/make a random directory for that app sometime you have to log the application directory then reveal it via OSX Finder Application.
 FinderUtils do it by start a small resfult service and handle the request from wherever then open the directory in Finder.
@@ -22,6 +24,7 @@ Navigate to the source code directory.
 > npm start
 2. Make an HTTP Request
 
+Swift
 ~~~~swift 
 //Define which directory you want to reveal.
 let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -31,6 +34,20 @@ var request = URLRequest(url: url!)
 NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {(response, data, error) in
             print("res + \(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))")
 }
+~~~~
+Objective-C
+~~~~obj-c
+NSMutableURLRequest *request = [[NSMutableURLRequest alloc] 
+        initWithURL:[NSURL 
+        URLWithString:@"http://127.0.0.1:8888/finder?path=%@", documentsPath]];
+ 
+[request setHTTPMethod:@"GET"];
+~~~~
+
+Java
+~~~~java
+URL url = new URL("192.168.1.111:8888/finder?path=Your_ADV_Folder");
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 ~~~~
 
 ## Contribution
